@@ -21,7 +21,7 @@ family_history = [] # Eczema, Skin Cancer, Ichthyosis, Albinism, Rosacea
 
 
 
-def gemini():
+def print_symptoms(diagnosis):
     prompt = f'''
         You are a dermatologist, who specializes in identifying skin conditions.
         Give me the treatment options of eczema.
@@ -31,4 +31,8 @@ def gemini():
     print(response.text)
     #return response.text
 
-gemini()
+def print_causes(diagnosis):
+    pass
+
+def print_description(diagnosis):
+    pass
