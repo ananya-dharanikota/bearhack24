@@ -87,10 +87,13 @@ def predict_image_classification_sample(
         print(" prediction:", dict(prediction))
         result = dict(prediction)
         diagnosis = result["displayNames"]
-        for item in diagnosis:
-            return item
+        confidences = result["confidences"]
+        diagnosis_confidence_dict = dict(zip(diagnosis, confidences))
+        most_confident_diagnosis = max(diagnosis_confidence_dict, key=diagnosis_confidence_dict.get)
+        print(most_confident_diagnosis)
+        return most_confident_diagnosis
 
 
 # predict_image_classification_sample(
-#     filename=compress_image(image_path)
+#     filename=compress_image("/Users/vincenthoang/Downloads/vincentacne.JPG")
 # )
