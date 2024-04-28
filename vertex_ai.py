@@ -9,8 +9,8 @@ load_dotenv()
 
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
-endpoint_id = "2243186239593250816"
-image_path = ""
+endpoint_id = "4623338642658557952"
+# image_path = "/Users/bryannguyen/Downloads/IMG_1027.jpg"  # CHANGE TO USER PHOTO INPUT
 
 from google.cloud import aiplatform
 from google.cloud.aiplatform.gapic.schema import predict
@@ -50,7 +50,7 @@ def compress_image(input_file_path, max_size=1500000, quality_step=5):
 def predict_image_classification_sample(
     filename: str,
     project: str = "1033084311617",
-    endpoint_id: str = "2243186239593250816",
+    endpoint_id: str = "4623338642658557952",
     location: str = "us-central1",
     api_endpoint: str = "us-central1-aiplatform.googleapis.com",
 ):
@@ -84,7 +84,7 @@ def predict_image_classification_sample(
     # See gs://google-cloud-aiplatform/schema/predict/prediction/image_classification_1.0.0.yaml for the format of the predictions.
     predictions = response.predictions
     for prediction in predictions:
-        # print(" prediction:", dict(prediction))
+        print(" prediction:", dict(prediction))
         result = dict(prediction)
         diagnosis = result["displayNames"]
         for item in diagnosis:
@@ -92,8 +92,5 @@ def predict_image_classification_sample(
 
 
 # predict_image_classification_sample(
-#     project="1033084311617",
-#     endpoint_id="2243186239593250816",
-#     location="us-central1",
 #     filename=compress_image(image_path)
 # )
