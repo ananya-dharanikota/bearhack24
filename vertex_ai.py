@@ -15,6 +15,8 @@ endpoint_id = "4623338642658557952"
 from google.cloud import aiplatform
 from google.cloud.aiplatform.gapic.schema import predict
 
+static_images_path = str(Path.cwd()) + "/static/images/"  # Change to correct static images path
+
 def compress_image(input_file_path, max_size=1500000, quality_step=5):
     """
     Compress an image and save it such that its size does not exceed max_size.
@@ -41,7 +43,7 @@ def compress_image(input_file_path, max_size=1500000, quality_step=5):
         quality -= quality_step  # Decrease quality to further reduce file size
     
     # Save the final compressed image
-    output_file_path = str(Path.cwd()) + "/bearhack24/static/images/file.jpg"
+    output_file_path = static_images_path + "file.jpg"
     img_bytes.seek(0)  # Rewind to the beginning of the file-like object
     img = Image.open(img_bytes)
     img.save(output_file_path, 'JPEG')
