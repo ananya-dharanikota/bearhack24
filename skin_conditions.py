@@ -19,6 +19,22 @@ model = genai.GenerativeModel('gemini-1.5-pro-latest')
 # exposure = [] # Chemicals, Environments, Animals
 # family_history = [] # Eczema, Skin Cancer, Ichthyosis, Albinism, Rosacea
 
+def filter_response(gemini_response) -> list:
+    response = gemini_response.split("\n")
+    filtered_text = []
+
+    # List of characters we want to keep (whitelist)
+    allowed_characters = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ -,;:")
+
+    for line in response:
+        # Keep only the allowed characters
+        filtered_line = "".join(char for char in line.strip() if char in allowed_characters)
+        
+        # Add the filtered line to the list if it's not empty
+        if filtered_line:
+            filtered_text.append(filtered_line)
+
+    return filtered_text
 
 
 def print_symptoms(diagnosis):
@@ -33,11 +49,13 @@ def print_symptoms(diagnosis):
     return response.text
     #return response.text
 
-def print_causes(diagnosis):
+def print_treatments(diagnosis):
     prompt = f'''
         You are a dermatologist, and you just identified that a patient
         of yours has {diagnosis}.
-        Briefly explain in a list, the causes of {diagnosis}
+        Briefly explain in a list what possible treatments that the patient can do
+        to treat {diagnosis}. The patient already knows the warnings, so you don't have
+        to say them, just possible treatments.
         '''
 
     response = model.generate_content(prompt)
@@ -57,7 +75,8 @@ def print_description(diagnosis):
     return response.text
 
 # skin = "acne"
-# # print_symptoms(skin)
-# # print_causes(skin)
-# print_description(skin)
-             
+# # # # print_symptoms(skin)
+# # # # print_causes(skin)
+# # # print_description(skin)
+
+# print(filter_response(print_symptoms(skin)))

@@ -61,7 +61,9 @@
 
         <div style="width: 175px; height: 45px; left: 506px; top: 531px; position: absolute; color: black; font-size: 35px; font-family: Inika; font-weight: 400; word-wrap: break-word">Overview</div>
         <div style="width: 691px; height: 366px; left: 509px; top: 598px; position: absolute; color: black; font-size: 20px; font-family: Inika; font-weight: 400; word-wrap: break-word">
-          <p>{{  overview  }}</p>
+          {% for line in overview %}
+            <p>{{  line  }}</p>
+          {% endfor %}
         </div>
       
     </div>
@@ -70,7 +72,11 @@
 
       <div style="width: 175px; height: 45px; left: 509px; top: 990px; position: absolute; color: black; font-size: 35px; font-family: Inika; font-weight: 400; word-wrap: break-word">Symptoms</div>
       <div style="width: 691px; height: 366px; left: 512px; top: 1057px; position: absolute; color: black; font-size: 20px; font-family: Inika; font-weight: 400; word-wrap: break-word">
-        <p>{{  symptoms  }}</p>
+        <ul>
+          {% for symptom in symptoms %}
+            <li>{{ symptom }}</li>
+          {% endfor %}
+        </ul>
       </div>
       
     </div>
@@ -78,9 +84,16 @@
 
       <div class="causes">
 
-          <div style="width: 175px; height: 45px; left: 497px; top: 1489px; position: absolute; color: black; font-size: 35px; font-family: Inika; font-weight: 400; word-wrap: break-word">Causes</div>
+          <div style="width: 175px; height: 45px; left: 497px; top: 1489px; position: absolute; color: black; font-size: 35px; font-family: Inika; font-weight: 400; word-wrap: break-word">Treatments</div>
           <div style="width: 691px; height: 366px; left: 500px; top: 1556px; position: absolute; color: black; font-size: 20px; font-family: Inika; font-weight: 400; word-wrap: break-word">
-            <p>{{ causes }}</p>
+            <!-- {% for item in causes %}
+              <p>{{ causes }}</p>
+            {% endfor %} -->
+            <ul>
+              {% for treat in treatments %}
+                <li>{{ treat }}</li>
+              {% endfor %}
+            </ul>
           </div>
           <div style="width: 490px; height: 20px; left: 497px; top: 2038px; position: absolute">
 
