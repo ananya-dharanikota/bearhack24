@@ -10,7 +10,7 @@ load_dotenv()
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 endpoint_id = "2243186239593250816"
-image_path = ""  # CHANGE TO USER PHOTO INPUT
+image_path = ""
 
 from google.cloud import aiplatform
 from google.cloud.aiplatform.gapic.schema import predict
@@ -41,16 +41,16 @@ def compress_image(input_file_path, max_size=1500000, quality_step=5):
         quality -= quality_step  # Decrease quality to further reduce file size
     
     # Save the final compressed image
-    output_file_path = str(Path.cwd()) + "/bearhack24/compressed_pics/file.jpg"
+    output_file_path = str(Path.cwd()) + "/bearhack24/static/images/file.jpg"
     img_bytes.seek(0)  # Rewind to the beginning of the file-like object
     img = Image.open(img_bytes)
     img.save(output_file_path, 'JPEG')
     return output_file_path
 
 def predict_image_classification_sample(
-    project: str,
-    endpoint_id: str,
     filename: str,
+    project: str = "1033084311617",
+    endpoint_id: str = "2243186239593250816",
     location: str = "us-central1",
     api_endpoint: str = "us-central1-aiplatform.googleapis.com",
 ):
@@ -84,15 +84,16 @@ def predict_image_classification_sample(
     # See gs://google-cloud-aiplatform/schema/predict/prediction/image_classification_1.0.0.yaml for the format of the predictions.
     predictions = response.predictions
     for prediction in predictions:
-        print(" prediction:", dict(prediction))
-        # result = dict(prediction)
-        # diagnosis = result["displayNames"]
-        # print(diagnosis)
+        # print(" prediction:", dict(prediction))
+        result = dict(prediction)
+        diagnosis = result["displayNames"]
+        for item in diagnosis:
+            return item
 
 
-predict_image_classification_sample(
-    project="1033084311617",
-    endpoint_id="2243186239593250816",
-    location="us-central1",
-    filename=compress_image(image_path)
-)
+# predict_image_classification_sample(
+#     project="1033084311617",
+#     endpoint_id="2243186239593250816",
+#     location="us-central1",
+#     filename=compress_image(image_path)
+# )
