@@ -30,6 +30,7 @@ def print_symptoms(diagnosis):
 
     response = model.generate_content(prompt)
     print(response.text)
+    return response.text
     #return response.text
 
 def print_causes(diagnosis):
@@ -41,6 +42,7 @@ def print_causes(diagnosis):
 
     response = model.generate_content(prompt)
     print(response.text)
+    return response.text
 
 def print_description(diagnosis):
     prompt = f'''
@@ -52,9 +54,10 @@ def print_description(diagnosis):
 
     response = model.generate_content(prompt)
     print(response.text)
+    return response.text
 
-skin = "acne"
-print_symptoms(skin)
-print_causes(skin)
-print_description(skin)
+# skin = "acne"
+# # print_symptoms(skin)
+# # print_causes(skin)
+# print_description(skin)
              
