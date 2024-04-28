@@ -30,7 +30,7 @@ def upload_img():
             print(treatments, 'OKAY')
             # You might want to pass some variables or results to the template
             print(image.filename)
-            return render_template("results.html", user_pic=image_path, overview=overview, symptoms=symptoms, treatments=treatments)
+            return render_template("results.html", user_pic=image_path, overview=overview, symptoms=symptoms, treatments=treatments, results=results)
         else:
             return redirect(request.url)
     else:
